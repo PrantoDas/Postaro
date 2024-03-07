@@ -1,0 +1,280 @@
+/* Main layout */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+header#topBar {
+    background-color: #086dd8;
+    color: #ffffff;
+    padding: 20px 0;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    top: 0;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#newsFeed {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 250px;
+    height: 82vh;
+    overflow-y: scroll;
+    background: aliceblue;
+}
+
+/* This will style the actual scrollbar track */
+#newsFeed::-webkit-scrollbar {
+    width: 8px; /* or any desired width */
+    background-color: #F5F5F5; /* or any desired color */
+  }
+  
+  /* This will style the scrollbar handle */
+  #newsFeed::-webkit-scrollbar-thumb {
+    background-color: #888; /* or any desired color */
+    border-radius: 4px; /* to make it round or "slim" */
+  }
+  
+  /* This will style the scrollbar handle on hover */
+  #newsFeed::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* or any desired color */
+  }
+  
+
+.sidebar {
+    width: 25%;
+    right: 0;
+    top: 0;
+    background-color: #f0f2f5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* User profile card styling */
+.user-profile-card {
+    background-color: #f5d8e1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 77vh;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info h3, .user-info p {
+    margin: 0;
+}
+
+.user-info {
+    text-align: center;
+}
+
+#siteName {
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+/* Post Card */
+.post-card {
+    background-color: #fff;
+    border: 1px solid #ccd0d5;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-user-info {
+    flex-grow: 1;
+}
+
+.post-user-name {
+    font-weight: bold;
+}
+
+.post-timestamp {
+    font-size: 0.8em;
+    color: #65676b;
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+.post-footer {
+    border-top: 1px solid #ccd0d5;
+    padding-top: 10px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.btn:hover {
+    background-color: #f0f2f5;
+}
+
+.reaction-btn::before {
+    content: '👍';
+    margin-right: 5px;
+}
+
+.comment-btn::before {
+    content: '💬';
+    margin-right: 5px;
+}
+
+.share-btn::before {
+    content: '🔗';
+    margin-right: 5px;
+}
+
+
+
+/* Comments */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.comment-avatar-container {
+    margin-right: 12px;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-body {
+    flex: 1;
+    background: #f0f2f5;
+    padding: 8px;
+    border-radius: 18px;
+    position: relative;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.comment-date {
+    color: #65676b;
+    font-size: 0.8rem;
+}
+
+.comment-content {
+    white-space: pre-wrap; /* Ensures that line breaks and spaces are preserved */
+}
+
+/* Add Comment */
+.add-comment-container {
+    display: flex;
+    margin-top: 10px;
+    padding: 0 10px; /* Adjust based on your layout */
+    align-items: center;
+}
+
+.add-comment-input {
+    flex-grow: 1;
+    margin-right: 10px; /* Space between input and button */
+    padding: 8px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 20px; /* Rounded edges */
+    outline: none; /* Removes the default focus outline */
+}
+
+.add-comment-input:focus {
+    border-color: #007bff; /* Highlight color when input is focused */
+}
+
+.btn.add-comment-submit {
+    padding: 8px 15px; /* Button padding */
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded edges */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.btn.add-comment-submit:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
+/* Footer styling */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Infinite scroll loading indicator */
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    main#newsFeed, header#topBar, footer {
+        padding: 10px;
+    }
+}
