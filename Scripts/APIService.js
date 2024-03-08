@@ -17,22 +17,22 @@ class APIService {
         return response.json();
     }
 
-    static async createComment(comment) {
-        const userCommented = await APIService.getUser(comment.userId);
-        return new Comment(comment.id, comment.content, comment.commentedOn, comment.userId, comment.postId, userCommented);
+    static async createComment({ userId, ...rest }) {
+        const userCommented = await APIService.getUser(userId);
+        return new Comment({ ...rest, userId, userCommented });
     }
 
     static async getUser(userId) {
         const userData = await this.sendRequest(`/users/${userId}`);
-        return new User(userData.id, userData.userName, userData.email, userData.profilePicUrl);
+        return new User(userData);
     }
 
     static async *getPosts(userId = null, postCount = 5) {
         let url = `/posts?userId=${userId}&&count=${postCount}`;
         const postsData = await this.sendRequest(url);
-        for (const post of postsData) {
-            const userPosted = await APIService.getUser(post.userId);
-            yield new Post(post.id, post.content, post.userId, userPosted);
+        for (const { userId, ...rest }  of postsData) {
+            const userPosted = await APIService.getUser(userId);
+            yield new Post({ ...rest, userId, userPosted });
         }
     }
 
@@ -52,6 +52,16 @@ class APIService {
 
         comment.commentedOn = 'Just now';
         return await this.createComment(comment);
+    }
+
+    static async getLatestPost(currentUserId) {
+        const latestPostData = await this.sendRequest(`/posts/${currentUserId}/latest`);
+        if (latestPostData) {
+            const { userId, ...rest } = latestPostData;
+            const userPosted = await APIService.getUser(userId);
+            return new Post({ ...rest, userId, userPosted });
+        }
+        return null;
     }
 }
 

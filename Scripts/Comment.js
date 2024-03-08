@@ -1,14 +1,9 @@
 import Renderable from './Renderable.js';
 
 class Comment extends Renderable {
-    constructor(id, content, commentedOn, postId, userId, userCommented) {
+    constructor({ id, content, commentedOn, postId, userId, userCommented }) {
         super();
-        this.id = id;
-        this.content = content;
-        this.commentedOn = commentedOn;
-        this.postId = postId;
-        this.userId = userId;
-        this.userCommented = userCommented;
+        Object.assign(this, { id, content, commentedOn, postId, userId, userCommented });
     }
 
     render() {

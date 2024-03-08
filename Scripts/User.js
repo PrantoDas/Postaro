@@ -1,12 +1,9 @@
 import Renderable from './Renderable.js';
 
 class User extends Renderable {
-    constructor(id, userName, email, profilePicUrl = '') {
+    constructor({ id, userName, email, profilePicUrl = '' }) {
         super();
-        this.id = id;
-        this.userName = userName;
-        this.email = email;
-        this.profilePicUrl = profilePicUrl;
+        Object.assign(this, { id, userName, email, profilePicUrl });
     }
 
     render() {

@@ -1,12 +1,9 @@
 import Renderable from './Renderable.js';
 
 class Post extends Renderable {
-    constructor(id, content, userId, userPosted) {
+    constructor({ id, content, userId, userPosted }) {
         super();
-        this.id = id;
-        this.content = content;
-        this.userId = userId;
-        this.userPosted = userPosted;
+        Object.assign(this, { id, content, userId, userPosted });
     }
 
     render() {

@@ -123,6 +123,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "a2b19138-13df-41dc-835e-e1571850620f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "posts/:userId/latest",
+      "responses": [
+        {
+          "uuid": "4601015a-2aec-4f75-8ad0-d8a1528a8518",
+          "body": "{\r\n  \"id\": \"{{faker 'datatype.uuid'}}\",\r\n  \"content\": \"{{faker 'lorem.paragraph'}}\",\r\n  \"userId\": \"{{faker 'datatype.uuid'}}\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -141,6 +170,10 @@
     {
       "type": "route",
       "uuid": "017e787b-03a7-458e-b50b-231ffcae034b"
+    },
+    {
+      "type": "route",
+      "uuid": "a2b19138-13df-41dc-835e-e1571850620f"
     }
   ],
   "proxyMode": false,

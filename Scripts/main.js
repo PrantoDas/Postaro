@@ -3,24 +3,27 @@ import APIService from './APIService.js';
 import RenderingService from './RenderingService.js';
   
 
-(function initApp() {
+(() => {
     let currentUser = null;
+    let latestPostId = null;
+    const notyf = new Notyf();
+
     console.log('Initializing the app...');
 
-    $(document).ready(async function() {
-        $(document).on('click', '.comment-btn', async function() {
-            const postId = $(this).data('post-id');
+    $(document).ready(async () => {
+        $(document).on('click', '.comment-btn', async (e) => {
+            const postId = $(e.currentTarget).data('post-id');
             await CommentService.loadComments(postId);
         });
 
-        $(document).on('click', '.add-comment-submit', async function() {
-            const postId = $(this).data('post-id');
+        $(document).on('click', '.add-comment-submit', async (e) => {
+            const postId = $(e.currentTarget).data('post-id');
             await CommentService.addNewComment(postId, currentUser.id);
         });
 
-        $(document).on('keypress', '.add-comment-input', async function(e) {
+        $(document).on('keypress', '.add-comment-input', async (e) => {
             if (e.key === 'Enter') {
-                const postId = $(this).data('post-id');
+                const postId = $(e.currentTarget).data('post-id');
                 await CommentService.addNewComment(postId, currentUser.id);
                 e.preventDefault(); // Prevent the default action to avoid form submission or newline in the input
             }
@@ -29,6 +32,16 @@ import RenderingService from './RenderingService.js';
         await loadUserData();
         await loadPosts(5);
         setupInfiniteScroll();
+
+        // Set up periodic check for new posts
+        setInterval(async () => {
+            const latestPost = await APIService.getLatestPost(currentUser.id);
+            if (latestPost && latestPost.id !== latestPostId) {
+                notyf.success(`New post posted by ${latestPost.userPosted.userName}`);
+                prependPost(latestPost);
+                latestPostId = latestPost.id;
+            }
+        }, 10000); // Check every 10 seconds
     });
 
     async function loadUserData() {
@@ -45,7 +58,7 @@ import RenderingService from './RenderingService.js';
 
     function debounce(func, delay) {
         let debounceTimer;
-        return function() {
+        return () => {
             const context = this;
             const args = arguments;
             clearTimeout(debounceTimer);
@@ -54,10 +67,17 @@ import RenderingService from './RenderingService.js';
     }
     
     function setupInfiniteScroll() {
-        $('#newsFeed').scroll(debounce(async function() {
+        $('#newsFeed').scroll(debounce(async () => {
             if ($('#newsFeed').scrollTop() + $('#newsFeed').innerHeight() >= $('#newsFeed')[0].scrollHeight - 1) {
                 await loadPosts(1);
             }
         }, 250)); //250ms delay
+    }
+
+    // Function to prepend the latest post to the UI
+    function prependPost(post) {
+        const newsFeedContainer = $('#newsFeed');
+        const postElement = RenderingService.render(post);
+        newsFeedContainer.prepend(postElement);
     }
 })();

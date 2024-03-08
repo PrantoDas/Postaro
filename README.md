@@ -25,7 +25,7 @@ This project simulates a small-scale **social media** application, allowing user
 
 ## Learning Focus
 
-The development of this application centered around exploring and implementing various JavaScript features, including:
+The development of this application centered around exploring and implementing various JavaScript features to ensure a rich user experience and efficient code structure:
 
 - **Template Literals**: Dynamically generating HTML content for user posts and comments.
 - **Class Syntax**: Utilizing modern JavaScript classes for creating user, post, and comment entities.
@@ -34,6 +34,9 @@ The development of this application centered around exploring and implementing v
 - **Generator Functions**: Implementing generators to facilitate the sequential loading of posts or comments upon user request.
 - **IIFE (Immediately Invoked Function Expressions)**: Used for script initialization and to encapsulate variables, avoiding global scope pollution.
 - **Modular Architecture**: Organizing code into modules for better maintainability, reusability, and separation of concerns, which aligns with modern JavaScript best practices.
+- **Object Manipulation and Destructuring**: Leveraging these techniques for more concise and readable code, especially when dealing with complex data structures.
+- **Spread Syntax**: Employing the spread syntax to efficiently combine and modify objects and arrays, enhancing code flexibility and readability.
+- **User Notifications for New Posts**: Introducing real-time notifications to inform users about new posts using a minimalistic, dependency-free library for non-blocking notifications, enriching user engagement without requiring user action.
 
 
 ## Technology Stack
